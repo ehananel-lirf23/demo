@@ -4,6 +4,7 @@ from . import views
 
 
 urlpatterns = {
+    # 定义路由时,必须要有严格的开始和结束 ^ $
     url(r'^index/$', views.index)
 }
 
