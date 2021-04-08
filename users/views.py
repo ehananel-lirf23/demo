@@ -9,3 +9,13 @@ def index(request):
     # return: response
     # HttpResponse类型的对象, 表示响应报文信息
     return HttpResponse("hello world")
+
+
+def say(request):
+    return HttpResponse("say!")
+
+
+def say_hello(request):
+    return HttpResponse("say hello")
+
+
