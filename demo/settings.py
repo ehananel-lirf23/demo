@@ -49,6 +49,7 @@ INSTALLED_APPS = [
 # middle ware中间件:类似于flask请求勾子
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
+    # Django默认就开启session缓存机制  SessionMiddleware session 中间件
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     # 'django.middleware.csrf.CsrfViewMiddleware',  # postman测试 先关闭csrf保护
@@ -140,3 +141,16 @@ STATICFILES_DIRS = [
     os.path.join(BASE_DIR, 'static_files'),
     # os.path.join(BASE_DIR, 'static_files/goods'),
 ]
+
+# caches 配置缓存（缓存后端为Redis） 设置
+CACHES = {
+    "default": {
+        "BACKEND": "django_redis.cache.RedisCache",
+        "LOCATION": "redis://192.168.103.210:6379/1",
+        "OPTIONS": {
+            "CLIENT_CLASS": "django_redis.client.DefaultClient",
+        }
+    }
+}
+SESSION_ENGINE = "django.contrib.sessions.backends.cache"
+SESSION_CACHE_ALIAS = "default"  # 会话缓存别名
