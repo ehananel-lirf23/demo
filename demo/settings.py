@@ -146,7 +146,7 @@ STATICFILES_DIRS = [
 CACHES = {
     "default": {
         "BACKEND": "django_redis.cache.RedisCache",
-        "LOCATION": "redis://192.168.103.210:6379/1",
+        "LOCATION": "redis://127.0.0.1:6379/1",  # 地址要注意 redis 配置文件conf bind的是什么 这里选择1号数据库
         "OPTIONS": {
             "CLIENT_CLASS": "django_redis.client.DefaultClient",
         }

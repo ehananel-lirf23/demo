@@ -1,7 +1,19 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import redirect
 from django.http.response import HttpResponse, JsonResponse
 import json
 from django.shortcuts import reverse
+
+
+def session_demo(request):
+    """演示session读取"""
+    # 设置session
+    # 当去设置session时,内部会自动生成一个session id 并且把这个session id 通过后面的response对象响应给浏览器设置到cookie
+    request.session['name'] = 'jack'
+    # session是依赖cookie!!!
+
+    # 读取session   当我们读取session是,先从request中拿cookie中的session id,通过id取出session这条记录,再用get(name)取出value
+    print(request.session.get("name"))
+    return HttpResponse("session_demo")
 
 
 # GET /cookie_demo/
@@ -110,5 +122,4 @@ def get_json(request):
     json_dict = json.loads(json_str)  # 把字符串的json字典转你json字典
     print(json_dict["a"])
     print(json_dict["b"])
-    return HttpResponse(b"get_json success!")
-
+    return HttpResponse("get_json success!")

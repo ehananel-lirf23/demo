@@ -14,4 +14,5 @@ urlpatterns = [
     url(r'^json_response/$', views.json_response),
     url(r'^redirect_index/$', views.redirect_index),
     url(r'^cookie_demo/$', views.cookie_demo),
+    url(r'^session_demo/$', views.session_demo),
 ]

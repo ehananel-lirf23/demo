@@ -1,4 +1,4 @@
-from django.shortcuts import render, reverse, redirect
+from django.shortcuts import reverse, redirect
 from django.http.response import HttpResponse
 
 
@@ -23,5 +23,3 @@ def say(request):
 
 def say_hello(request):
     return HttpResponse("say hello")
-
-
