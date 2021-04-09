@@ -8,4 +8,7 @@ urlpatterns = [
     url(r'^demo_view/$', views.DemoView.as_view()),  # 注： as_view() 方法
 
     # url(r'^demo_view/$', views.my_decorator(views.DemoView.as_view())), # 直接在路由的地方 会装饰整个类个视图
+
+    # 测试 templates 模版路由
+    url(r'^template_demo/$', views.template_demo),
 ]

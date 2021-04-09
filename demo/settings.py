@@ -65,11 +65,11 @@ MIDDLEWARE = [
 # root urlconf 工程路由的入口（视图函数定义 url需要进入的入口）
 ROOT_URLCONF = 'demo.urls'
 
-# templates 模板文件配置项 django 不擅长模板文件 一般django用于前后端分离 模板文件 由nginx 服务器处理
+# templates 模板文件配置项 !!!  django 不擅长模板文件 一般django用于前后端分离 模板文件 由nginx 服务器处理
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [os.path.join(BASE_DIR, "templates")],  # 指定模板文件的加载路径,类似 flask指定templates folder
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [

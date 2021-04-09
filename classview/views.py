@@ -4,6 +4,18 @@ from django.views.generic import View  # generic通用类 导入View
 from django.http.response import HttpResponse
 
 
+# GET /template_demo/
+def template_demo(request):
+    """演示模板加载"""
+    context = {
+        "name": "jack",
+        "a_list": [1, 5, 2, 3],
+        "a_dict": {"age": 25}
+    }
+    # render(参数1 跟 视图函数一样 第一个 须有request)
+    return render(request, "index.html", context=context)
+
+
 # 定义装饰器装饰视图
 def my_decorator(view_func):
     """定义装饰器装饰视图"""
