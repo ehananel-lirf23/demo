@@ -57,6 +57,9 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    # 注册中间件 # 请求是自上而下,响应是自下而上
+    'middle_ware.my_middleware1',
+    'middle_ware.my_middleware2',
 ]
 
 # root urlconf 工程路由的入口（视图函数定义 url需要进入的入口）
