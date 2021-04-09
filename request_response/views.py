@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.http.response import HttpResponse, JsonResponse
 import json
 from django.shortcuts import reverse
@@ -7,8 +7,7 @@ from django.shortcuts import reverse
 def redirect_index(request):
     """重定向到index"""
     # 起了命名空间 那就必须格式：  命名空间：路由名
-    print(reverse('request_response:index'))
-    return HttpResponse("redirect_index")
+    return redirect(reverse('request_response:index'))
 
 
 # GET /json_response/

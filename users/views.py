@@ -1,11 +1,12 @@
-from django.shortcuts import render, reverse
+from django.shortcuts import render, reverse, redirect
 from django.http.response import HttpResponse
 
 
 def redirect_index(request):
-    """user中反向解析"""
-    print(reverse("users:index"))
-    return HttpResponse("redirect_index")
+    """user中反向解析重定向"""
+    # 反向解析 类是flask中的 url_for 重定向到主页
+    return redirect(reverse("users:index"))
+    # return HttpResponse("redirect_index")
 
 
 def index(request):
