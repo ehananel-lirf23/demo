@@ -4,6 +4,21 @@ import json
 from django.shortcuts import reverse
 
 
+# GET /cookie_demo/
+def cookie_demo(request):
+    """演示cookie读写"""
+    # 设置cookie
+    response = HttpResponse("cookie_demo")
+    # 设置cookie   set_cookie(key, value, 过期时间单秒(秒))
+    response.set_cookie("name", "jack", max_age=3600)
+    # 读取cookie,cookie 存在浏览器端
+    print(request.COOKIES.get("name"))
+    return response
+
+
+# ===============================
+
+
 def redirect_index(request):
     """重定向到index"""
     # 起了命名空间 那就必须格式：  命名空间：路由名
