@@ -23,5 +23,5 @@ urlpatterns = [
     # namespace 命名空间
     url(r'^', include("users.urls", namespace="users")),
     url(r'^', include("request_response.urls", namespace="request_response")),
-
+    url(r'^', include("classview.urls")),
 ]

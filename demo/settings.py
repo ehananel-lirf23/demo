@@ -43,7 +43,8 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'users.apps.UsersConfig',  # 新注册的子应用users
-    'request_response.apps.RequestResponseConfig'
+    'request_response.apps.RequestResponseConfig',
+    'classview.apps.ClassviewConfig',  # 注册新的子应用 测试 类视图
 ]
 
 # middle ware中间件:类似于flask请求勾子
