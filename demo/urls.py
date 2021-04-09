@@ -20,7 +20,8 @@ urlpatterns = [
     url(r'^admin/', admin.site.urls),
     # 添子路由 相当于前缀  user/??? 后段的url由子应用中的urls文件定义
     # url(r'^user/', include('users.urls')),
-    url(r'^', include("users.urls")),
-    url(r'^', include("request_response.urls")),
+    # namespace 命名空间
+    url(r'^', include("users.urls", namespace="users")),
+    url(r'^', include("request_response.urls", namespace="request_response")),
 
 ]

@@ -1,6 +1,14 @@
 from django.shortcuts import render
 from django.http.response import HttpResponse, JsonResponse
 import json
+from django.shortcuts import reverse
+
+
+def redirect_index(request):
+    """重定向到index"""
+    # 起了命名空间 那就必须格式：  命名空间：路由名
+    print(reverse('request_response:index'))
+    return HttpResponse("redirect_index")
 
 
 # GET /json_response/
@@ -29,6 +37,8 @@ def response_demo(request):
 
 def index(request):
     """index"""
+    # 命名空间：路由名   无命令空间容易与其他子应用重叠，执行结果会是靠近项目根路径的，所以一般都设定一个命名空间 一般与子应用同名
+    # print(reverse("index"))
     return HttpResponse("django index")
 
 

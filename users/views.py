@@ -1,8 +1,13 @@
-from django.shortcuts import render
+from django.shortcuts import render, reverse
 from django.http.response import HttpResponse
 
 
-# Create your views here.
+def redirect_index(request):
+    """user中反向解析"""
+    print(reverse("users:index"))
+    return HttpResponse("redirect_index")
+
+
 def index(request):
     """创建视图函数，测试视图和路由匹配"""
     # param：  request: HttpRequest类型对象, 表示请求报文信息
