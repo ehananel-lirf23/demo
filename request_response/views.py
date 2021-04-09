@@ -3,6 +3,18 @@ from django.http.response import HttpResponse
 import json
 
 
+def index(request):
+    """index"""
+    return HttpResponse("django index")
+
+
+def get_request_head(request):
+    """演示获取请求头信息"""
+    print(request.META.get('CONTENT_TYPE'))  # 注 大写 才能获取
+    print(request.user)  # AnonymousUser    未登录  默认是匿名用户
+    return HttpResponse("get_request_head")
+
+
 # url(r'^weather/([a-z]+)/(\d{4})/$', views.weather)
 # 注意urls 正则必须有 且位置参数 有顺序， 位置参数传参
 def weather1(request, city, year):
