@@ -1,6 +1,21 @@
 from django.shortcuts import render
-from django.http.response import HttpResponse
+from django.http.response import HttpResponse, JsonResponse
 import json
+
+
+# GET /json_response/
+def json_response(request):
+    """演示响应json数据"""
+    # JSON字典中的引号必须要用双引号
+    json_dict = {
+        "name": "jack",
+        "age": 20
+    }
+    # JsonResponse 继承 HttpResponse 这个返回主要用来接受json字典的形式， 自动处理 得到响应体 还是通过HttpResponse返回
+    # 源码；kwargs.setdefault('content_type', 'application/json')
+    # 源码；data = json.dumps(data, cls=encoder, **json_dumps_params)
+    # 源码；super(JsonResponse, self).__init__(content=data, **kwargs)
+    return JsonResponse(json_dict)
 
 
 def response_demo(request):
