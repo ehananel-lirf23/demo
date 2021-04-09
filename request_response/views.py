@@ -3,6 +3,15 @@ from django.http.response import HttpResponse
 import json
 
 
+def response_demo(request):
+    # HttpResponse(content=响应体, content_type=响应体数据类型, status=状态码)
+    # 必须传递响应体,其它可以用默认的
+    return HttpResponse('response_demo', content_type='text/plain', status=201)
+
+
+# =================================================================
+
+
 def index(request):
     """index"""
     return HttpResponse("django index")
