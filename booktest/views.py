@@ -97,3 +97,26 @@ BookInfo.objects.filter(~Q(id=3))  # BookInfo.objects.exclude(id=3)
 BookInfo.objects.aggregate(Sum('bread'))
 # 2.统计平均的阅读量
 BookInfo.objects.aggregate(Avg('bread'))
+
+# 排序
+BookInfo.objects.all().order_by('bread')  # 升序
+BookInfo.objects.all().order_by('-bread')  # 降序
+
+########################################################
+
+# 基础关联查询
+# 1.一查多：查询编号为1的图书中所有人物信息
+book = BookInfo.objects.get(id=1)  # 获取书本对象
+# 被外键的一方 自动生成 :类名小写_set
+book.heroinfo_set.all()  # 查处属于该书本的所有英雄(heroinfo_set在模型中没有定义，是由多方 定义外键的时候 一的方自动生成的关系字段)
+
+# 2.多查一：查询编号为1的英雄出自的书籍
+hero = HeroInfo.objects.get(id=1)  # 获取英雄对象
+hero.hbook  # 定义有关系字段 直接 使用
+
+
+# 关联过滤查询 重点
+# 1.多查一：查询书籍中人物的描述包含"降龙"的书籍
+BookInfo.objects.filter(heroinfo__hcomment__contains='降龙')  # 多查一，filter里的条件 是用类名小写
+# 2.一查多：查询书名为"天龙八部"的所有人物信息
+HeroInfo.objects.filter(hbook__btitle='天龙八部')
