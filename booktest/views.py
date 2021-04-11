@@ -112,11 +112,27 @@ book.heroinfo_set.all()  # 查处属于该书本的所有英雄(heroinfo_set在�
 
 # 2.多查一：查询编号为1的英雄出自的书籍
 hero = HeroInfo.objects.get(id=1)  # 获取英雄对象
-hero.hbook  # 定义有关系字段 直接 使用
+hero.hbook  # 定义有关系字段 直接 使用      没有 .first()
 
 
-# 关联过滤查询 重点
+"""内联查询/关联过滤查询 重点"""
+# 想要查谁,就以谁的模型名开头
 # 1.多查一：查询书籍中人物的描述包含"降龙"的书籍
 BookInfo.objects.filter(heroinfo__hcomment__contains='降龙')  # 多查一，filter里的条件 是用类名小写
 # 2.一查多：查询书名为"天龙八部"的所有人物信息
 HeroInfo.objects.filter(hbook__btitle='天龙八部')
+
+
+"""修改"""
+# 修改 需要对象.save() 保存到数据库
+book = BookInfo.objects.get(btitle='西游记')
+book.btitle = '西游记后传'
+book.save()
+# 修改 update 更新 直接保存数据库
+BookInfo.objects.filter(btitle='第二版').update(btitle='第二版<<真的第二先上线>>', bread=30, bcomment=40)
+
+"""删除"""
+# 修改 delete  直接保存数据库
+book = BookInfo.objects.get(id=6)  # 错误写法：book = BookInfo.objects.get(id=6).delete()
+book.delete()  # 因为get获取得到的是 对象 不是查询集 不能 进行过滤filter操作
+BookInfo.objects.filter(id__gte=5).delete()
