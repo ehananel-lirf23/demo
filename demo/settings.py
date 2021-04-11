@@ -92,8 +92,12 @@ WSGI_APPLICATION = 'demo.wsgi.application'
 # 数据库的配置项: 默认用是sqlite3,将来换成mysql
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+        'ENGINE': 'django.db.backends.mysql',   # 引擎选择mysql
+        'HOST': '192.168.103.210',  # 数据库主机
+        'PORT': 3306,  # 数据库端口
+        'USER': 'root',  # 数据库用户名
+        'PASSWORD': 'mysql',  # 数据库用户密码
+        'NAME': 'django',  # 数据库名字
     }
 }
 
