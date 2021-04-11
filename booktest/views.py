@@ -44,3 +44,33 @@ book2 = BookInfo.objects.create(
 # 查询出全部对象 返回的是一个 查询集 [ ]
 BookInfo.objects.all()
 BookInfo.objects.count()
+
+
+# 基本条件查询
+# 1.查询id为1的书籍
+# BookInfo.objects.filter(id__exact=1)  # __exact 直接写 '=' 即可
+BookInfo.objects.filter(id=1)
+
+# 2.查询书名包含‘湖’的书籍  like %湖%
+BookInfo.objects.filter(btitle__contains='湖')
+
+# 3.查询书名以‘部’结尾的书籍 （endswith 、startswith）like %部  部%
+BookInfo.objects.filter(btitle__endswith='部')
+
+# 4.查询书名不为空的书籍
+BookInfo.objects.filter(btitle__isnull=False)
+
+# 5.查询编号为2或4的书籍
+BookInfo.objects.filter(id__in=[2, 4])
+
+# 6.查询编号大于2的书籍  gt >   gte >=   lt <   lte  <=
+BookInfo.objects.filter(id__gt=2)
+
+# 7.查询id不等于3的书籍
+BookInfo.objects.exclude(id=3)
+
+# 8.查询1980年发表的书籍
+BookInfo.objects.filter(bpub_date__year='1980')
+
+# 9.查询1990年1月1日后发表的书籍
+BookInfo.objects.filter(bpub_date__gt='1990-1-1')
