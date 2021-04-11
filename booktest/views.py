@@ -36,3 +36,11 @@ book2 = BookInfo.objects.create(
     bcomment=10
 )
 
+"""演示基本查询  get  all  count"""
+# try:
+#     BookInfo.objects.get(id=1)
+# except BookInfo.DoesNotExist:
+#     print()
+# 查询出全部对象 返回的是一个 查询集 [ ]
+BookInfo.objects.all()
+BookInfo.objects.count()
