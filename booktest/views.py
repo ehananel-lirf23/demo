@@ -3,7 +3,7 @@ from django.shortcuts import render
 # Create your views here.
 from booktest.models import BookInfo, HeroInfo
 from datetime import date
-
+from django.db.models import F, Q, Sum, Avg  # 导入 F Q 对象 ，聚合Sum, Avg
 """演示增加数据  save和create"""
 book = BookInfo()  # 创建一个记录对象
 book.btitle = '西游记'
@@ -74,3 +74,26 @@ BookInfo.objects.filter(bpub_date__year='1980')
 
 # 9.查询1990年1月1日后发表的书籍
 BookInfo.objects.filter(bpub_date__gt='1990-1-1')
+
+
+# F对象
+# 1.查询阅读量大于评论量的书籍
+BookInfo.objects.filter(bread__gt=F('bcomment'))
+# 2.查询阅读量大于2倍评论量的书籍
+BookInfo.objects.filter(bread__gt=F('bcomment' * 2))
+
+# Q对象
+# 1.查询阅读量大于20，并且编号小于3的图书。
+# BookInfo.objects.filter(bread__gt=20).filter(id__lt=3)  # 不这样用
+# BookInfo.objects.filter(Q(bread__gt=20) & Q(id__lt=3))  # 不这样用 直接
+BookInfo.objects.filter(bread__gt=20, id__lt=3)
+# 2.查询阅读量大于20，或编号小于3的图书  注意Q一个属性Bo
+BookInfo.objects.filter(Q(bread__gt=20) | Q(id__lt=3))
+# 3.查询编号不等于3的书籍
+BookInfo.objects.filter(~Q(id=3))  # BookInfo.objects.exclude(id=3)
+
+# 聚合函数
+# 1.统计总的阅读量
+BookInfo.objects.aggregate(Sum('bread'))
+# 2.统计平均的阅读量
+BookInfo.objects.aggregate(Avg('bread'))
