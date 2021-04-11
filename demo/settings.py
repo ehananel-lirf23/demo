@@ -45,6 +45,8 @@ INSTALLED_APPS = [
     'users.apps.UsersConfig',  # 新注册的子应用users
     'request_response.apps.RequestResponseConfig',
     'classview.apps.ClassviewConfig',  # 注册新的子应用 测试 类视图
+    # 只有在子应用中使用了模型要迁移建表,及子应用中使用了'模板'才需要注册应用,如果应用中只有视图和路由的逻辑,那么此应用可以不注册
+    'booktest.apps.BooktestConfig'  # 演示ORM操作数据库
 ]
 
 # middle ware中间件:类似于flask请求勾子
@@ -93,7 +95,7 @@ WSGI_APPLICATION = 'demo.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',   # 引擎选择mysql
-        'HOST': '192.168.103.210',  # 数据库主机
+        'HOST': '127.0.0.1',  # 数据库主机
         'PORT': 3306,  # 数据库端口
         'USER': 'root',  # 数据库用户名
         'PASSWORD': 'mysql',  # 数据库用户密码
