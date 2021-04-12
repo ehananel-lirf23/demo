@@ -17,7 +17,11 @@ class BookInfoAdmin(admin.ModelAdmin):
 @admin.register(HeroInfo)
 class HeroInfoAdmin(admin.ModelAdmin):
     """控制HeroInfo 管理类 使用装饰器"""
-    pass
+    list_display = ['id', 'hname', 'hcomment', 'hbook', 'is_delete', 'book_read']
+    # 过滤数据
+    list_filter = ['hbook']
+    # 搜索框
+    search_fields = ['hname']
 
 
 """用管理类有两种方式:  1.注册参数 2. 装饰器"""

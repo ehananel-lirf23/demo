@@ -47,3 +47,8 @@ class HeroInfo(models.Model):
 
     def __str__(self):
         return self.hname
+
+    def book_read(self):
+        """返回英雄所在书籍的阅读量"""
+        return self.hbook.bread
+    book_read.short_description = '阅读量'
