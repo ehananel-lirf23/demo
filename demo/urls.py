@@ -24,4 +24,6 @@ urlpatterns = [
     url(r'^', include("users.urls", namespace="users")),
     url(r'^', include("request_response.urls", namespace="request_response")),
     url(r'^', include("classview.urls")),
+    # 图书
+    url(r'^', include("booktest.urls")),
 ]
