@@ -10,6 +10,7 @@ DELETE  /books/<pk>/    删除指定id的记录
 from django.views.generic import View
 from .models import BookInfo
 from django.http.response import JsonResponse, HttpResponse
+import json
 
 
 class BooksAPIView(View):
@@ -19,7 +20,7 @@ class BooksAPIView(View):
         """查询所有图书"""
         # 1.查询所有图书模型数据
         books = BookInfo.objects.all()
-        book_dict_list = []
+        book_dict_list = []  # 保存图书字典
         for book in books:
             book_dict = {
                 'id': book.id,
@@ -32,7 +33,27 @@ class BooksAPIView(View):
         return JsonResponse(book_dict_list, safe=False)  # safe 默认是True 设置safe=False，不安全，因为传列表里面有字典。
 
     def post(self, request):
-        pass
+        """新增书籍"""
+        # 1.提取请求体中的数据
+        json_str_bytes = request.body
+        json_str = json_str_bytes.decode('utf8')
+        json_dict = json.loads(json_str)
+        # 此处省略数据的校验
+        # 2.创建模型对象并保存到数据
+        book = BookInfo.objects.create(
+            btitle=json_dict['btitle'],
+            bpub_date=json_dict['bpub_date'],
+        )
+        # 把模型转换成字典
+        book_dict = {
+            'bcomment': book.bcomment,
+            'bread': book.bread,
+            'bpub_date': book.bpub_date,
+            'id': book.id,
+            'btitle': book.btitle,
+        }
+        # 3.响应
+        return JsonResponse(book_dict, status=201)  # 新增状态码 201
 
 
 class BookAPIView(View):
