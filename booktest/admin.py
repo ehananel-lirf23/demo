@@ -12,6 +12,14 @@ class BookInfoAdmin(admin.ModelAdmin):
 
     # 控制列表页面展示的那些列, 管理的书籍, 可以是BookInfo模型类 中属性 以及 方法
     list_display = ['id', 'btitle', 'pub_date_format', 'bread', 'bcomment', 'is_delete']
+    ordering = ['btitle']
+
+    # fields = ['btitle', 'bpub_date', 'is_delete']  # 控制列表界面所展示的字段,默认全部展示
+    # fieldsets 可以设置 详情 列表 界面 的 分类显示 。将属性进行分类
+    fieldsets = [
+        ['基本', {'fields': ['btitle', 'bpub_date', 'is_delete']}],
+        ['高级', {'fields': ['bread', 'bcomment'], 'classes': ['collapse']}]  # 'classes': ['collapse']} 样式卷起
+    ]
 
 
 @admin.register(HeroInfo)
