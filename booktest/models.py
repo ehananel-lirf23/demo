@@ -20,6 +20,13 @@ class BookInfo(models.Model):
         """定义每个数据对象的显示信息"""
         return self.btitle
 
+    # 定义一个方法，来显示出 固定格式的 信息
+    def pub_date_format(self):
+        """返回指定格式的日期"""
+        return self.bpub_date.strftime('%Y-%m-%d')  # 日期转换 字符串固定格式 Y 年 m 月  d 日    M小写表示秒
+    pub_date_format.short_description = '发布日期'  # 修改它在站点上显示的名字
+    pub_date_format.admin_order_field = 'bpub_date'  # 指定此方法依赖那个字段进行排序
+
 
 # 定义英雄模型类HeroInfo
 class HeroInfo(models.Model):
