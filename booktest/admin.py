@@ -23,7 +23,7 @@ class BookInfoAdmin(admin.ModelAdmin):
     # fields = ['btitle', 'bpub_date', 'is_delete']  # 控制列表界面所展示的字段,默认全部展示
     # fieldsets 可以设置 详情 列表 界面 的 分类显示 。将属性进行分类
     fieldsets = [
-        ['基本', {'fields': ['btitle', 'bpub_date', 'is_delete']}],
+        ['基本', {'fields': ['btitle', 'bpub_date', 'is_delete', 'image']}],
         ['高级', {'fields': ['bread', 'bcomment'], 'classes': ['collapse']}]  # 'classes': ['collapse']} 样式卷起
     ]
 

@@ -166,3 +166,6 @@ CACHES = {
 }
 SESSION_ENGINE = "django.contrib.sessions.backends.cache"
 SESSION_CACHE_ALIAS = "default"  # 会话缓存别名
+
+# 配置站点中上传的图片存储目录
+MEDIA_ROOT = os.path.join(BASE_DIR, 'static_files/media')

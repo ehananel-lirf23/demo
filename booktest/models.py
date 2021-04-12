@@ -10,6 +10,10 @@ class BookInfo(models.Model):
     bread = models.IntegerField(default=0, verbose_name='阅读量')
     bcomment = models.IntegerField(default=0, verbose_name='评论量')
     is_delete = models.BooleanField(default=False, verbose_name='逻辑删除')
+    # ImageField 它将来会在站点中自动生成上传图片的表单
+    # upload_to 表示上传的文件具体的存储目录,它是基于media/booktest/11.png
+    # null=True 如果模型对象的表已经存在,并且已经有记录了,此时后追加的字段必须(要么给个默认值,要么可以为空)
+    image = models.ImageField(upload_to='booktest', verbose_name='图片', null=True)
 
     class Meta:
         db_table = 'tb_books'  # 指明数据库表名
