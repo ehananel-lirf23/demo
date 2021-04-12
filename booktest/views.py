@@ -59,11 +59,51 @@ class BooksAPIView(View):
 class BookAPIView(View):
     """更新/查单一/删除"""
 
-    def get(self, request):  # 查单一
-        pass
+    def get(self, request, pk):  # 查单一, 正则组规定变量名为pk  方法接收
+        """查询指定的某本书"""
+        try:
+            book = BookInfo.objects.get(id=pk)
+        except BookInfo.DoesNotExist:
+            return HttpResponse({'message': 'pk不存在'}, status=400)
+        # 2.把模型转字典
+        book_dict = {
+            'id': book.id,
+            'btitle': book.btitle,
+            'bpub_date': book.bpub_date,
+            'bcomment': book.bcomment,
+            'bread': book.bread,
+        }
+        return JsonResponse(book_dict)
 
-    def put(self, request):  # 更新修改
-        pass
+    def put(self, request, pk):  # 更新修改
+        json_str_bytes = request.body
+        json_str = json_str_bytes.decode('utf8')
+        json_dict = json.loads(json_str)
+        try:
+            book = BookInfo.objects.get(id=pk)
+        except BookInfo.DoesNotExist:
+            return HttpResponse({'message': 'pk不存在'}, status=400)
 
-    def push(self, request):  # 删除
-        pass
+        # 3.更新
+        book.btitle = json_dict['btitle']
+        book.bpub_date = json_dict['bpub_date']
+        book.save()  # 更新 注意更新到 数据库
+        # 且 前后端分类 要 将修改后数据 返回给前端
+        book_dict = {
+            'id': book.id,
+            'btitle': book.btitle,
+            'bpub_date': book.bpub_date,
+            'bcomment': book.bcomment,
+            'bread': book.bread,
+        }
+        return JsonResponse(book_dict)
+
+    def delete(self, request, pk):  # 删除
+        try:
+            book = BookInfo.objects.get(id=pk)
+        except BookInfo.DoesNotExist:
+            return HttpResponse({'message': 'pk不存在'}, status=400)
+        if not book:
+            return HttpResponse({'message': 'pk不存在'}, status=400)
+        book.delete()  # 对象删除  与 查询集的删除 不同一个方法
+        return HttpResponse(status=204)  # 204删除状态码
