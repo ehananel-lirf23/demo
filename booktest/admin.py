@@ -4,6 +4,12 @@ from django.contrib import admin
 from .models import BookInfo, HeroInfo
 
 
+class HeroInfoStackInLine(admin.TabularInline):  # 继承TabularInline类
+    """关联展示信息"""
+    model = HeroInfo  # 关联的 类模型
+    extra = 1  # 额外的编辑框 数量， 就编辑页面 最后显示多一条可以编辑的框
+
+
 class BookInfoAdmin(admin.ModelAdmin):
     """BookInfo模型管理类: 管理它在admin站点上的显示信息"""
     list_per_page = 2  # 每页显示多少条数据
@@ -20,6 +26,9 @@ class BookInfoAdmin(admin.ModelAdmin):
         ['基本', {'fields': ['btitle', 'bpub_date', 'is_delete']}],
         ['高级', {'fields': ['bread', 'bcomment'], 'classes': ['collapse']}]  # 'classes': ['collapse']} 样式卷起
     ]
+
+    # 在图书的编辑界面到当前这本书关联的英雄都展示出来
+    inlines = [HeroInfoStackInLine]
 
 
 @admin.register(HeroInfo)
