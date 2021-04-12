@@ -127,9 +127,9 @@ AUTH_PASSWORD_VALIDATORS = [
 # Internationalization
 # https://docs.djangoproject.com/en/1.11/topics/i18n/
 
-# 设置语言 默认是英语 可以调整为简体中文 'zh-Hans'
+# 设置语言 默认是英语 可以调整为简体中文 'zh-Hans'  或者 'zh-hans'
 LANGUAGE_CODE = 'en-us'
-# 时区: 默认是世界时区  可以改为亚洲上海  Asia-Shanghai
+# 时区: 默认是世界时区  可以改为亚洲上海  Asia/Shanghai
 TIME_ZONE = 'UTC'
 
 USE_I18N = True

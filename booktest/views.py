@@ -134,5 +134,7 @@ BookInfo.objects.filter(btitle='第二版').update(btitle='第二版<<真的第�
 """删除"""
 # 修改 delete  直接保存数据库
 book = BookInfo.objects.get(id=6)  # 错误写法：book = BookInfo.objects.get(id=6).delete()
+# base.py里Model类的delete, 先得到对象 再使用对象的实例
 book.delete()  # 因为get获取得到的是 对象 不是查询集 不能 进行过滤filter操作
+# query.py里Queryset类的的delete
 BookInfo.objects.filter(id__gte=5).delete()
