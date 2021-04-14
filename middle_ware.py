@@ -1,9 +1,10 @@
 """
-# 第一次
+# 启动运行 初始化：
 init2 被调用
 init1 被调用
 init2 被调用
 init1 被调用
+第一次请求开始：
 before request1 被调用
 before request2 被调用
 装饰器被调用了

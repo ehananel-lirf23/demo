@@ -42,6 +42,9 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+
+    'rest_framework',  # DRF  注册 引用 格式 最好 上是框架自带引用 这里 第三方， 下面 自设计的子应用
+
     'users.apps.UsersConfig',  # 新注册的子应用users
     'request_response.apps.RequestResponseConfig',
     'classview.apps.ClassviewConfig',  # 注册新的子应用 测试 类视图
