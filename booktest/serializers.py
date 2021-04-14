@@ -40,6 +40,20 @@ class BookInfoSerializer(serializers.Serializer):  # Serializer 是  ModelSerial
             raise serializers.ValidationError('阅读量小于评论量')
         return attrs
 
+    def create(self, validated_data):  # 重写BaseSerializer中定义的方法
+        """新建 模型类 对象"""
+        # **validated_data 注意两颗心  需要关键字参数  Serializer(instance=None? data=None? **kwargs)
+        return BookInfo.objects.create(**validated_data)  # create自动保存到数据库，相当于创建对象完成后  对象.save()
+    
+    def update(self, instance, validated_data):  # 传入的是参数1：要修改的实例对象， 参数2：校验完后 的 django中有序字典
+        """更新，instance为要更新的对象实例"""
+        instance.btitle = validated_data.get('btitle', instance.btitle)
+        instance.bpub_date = validated_data.get('bpub_date', instance.bpub_date)
+        instance.bread = validated_data.get('bread', instance.bread)
+        instance.bcomment = validated_data.get('bcomment', instance.bcomment)
+        instance.save()  # 更新结束后 保存到数据库
+        return instance
+
 
 class HeroInfoSerializer(serializers.Serializer):
     """英雄数据序列化器"""

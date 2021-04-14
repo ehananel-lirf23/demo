@@ -37,12 +37,21 @@ serializer_hero.data
 
 
 """反序列化"""
-data = {'btitle': 'django三国演义', 'bpub_date': '1996-5-1', 'bcomment': 40, 'bread': 30}
-serializer = BookInfoSerializer(data=data)  # instance data **kwargs
+# 新建
+data = {'btitle': 'django三国演义', 'bpub_date': '1996-5-1', 'bcomment': 10, 'bread': 30}
+serializer = BookInfoSerializer(data=data)  # 新建 没有参数instance，看重写的create方法 只传入一个参数
 # serializer.is_valid()  # 返回布尔值
-# serializer.errors  # is_valid 返回 False,看错误信息
 serializer.is_valid(raise_exception=True)  # 如果出现异常自动抛出
-serializer.validated_data  # OrderedDict([('btitle', '三国演义'), ('bpub_date', datetime.date(1996, 5, 1))])
+# serializer.errors  # is_valid 返回 False,看错误信息
+# serializer.validated_data  # OrderedDict([('btitle', '三国演义'), ('bpub_date', datetime.date(1996, 5, 1))])
+serializer.save()  # 执行继承的方法 实质 选择方法(update/create 方法里保存到数据库)
+
+# 更新
+book = BookInfo.objects.get(id=9)
+data = {'btitle': '大国django三国演义', 'bpub_date': '1996-6-6', 'bcomment': 10, 'bread': 30}
+serializer = BookInfoSerializer(instance=book, data=data)
+serializer.is_valid(raise_exception=True)
+serializer.save()  # 序列化中的saexitve实质 依靠方法模型自身的save()
 
 
 # class BookAPIViewSet(ModelViewSet):
