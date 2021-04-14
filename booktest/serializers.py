@@ -26,11 +26,19 @@ class BookInfoSerializer(serializers.Serializer):  # Serializer 是  ModelSerial
     heroinfo_set = serializers.PrimaryKeyRelatedField(label='英雄', read_only=True, many=True)
     # heroinfo_set = serializers.StringRelatedField(label='英雄', read_only=True, many=True)
 
-    # 对单一字段进行额外追加校验逻辑时 固定写法 方法名: validate_字段名
-    def validate_btitle(self, value):
+    # 对单一字段进行额外追加校验逻辑时 固定写法 方法名: validate_字段名()
+    def validate_btitle(self, value):  # 注意点 上面的属性定义的时候 校验该变量btible 然后 就会先校验这个方法，然后再到上面继续下一个字段
         if 'django' not in value.lower():
             raise serializers.ValidationError('图书不是关于Django的')
         return value  # 逻辑判断完后 一般原路返回
+
+    # 多个字段 进行比较 验证时 固定写法方法： validate()
+    def validate(self, attrs):  # ！！与单个字段 验证  不同的是 这多个字段 报错 不会指定到哪个字段上出错，且是校验以上所有字段定义的类似等条件后才进行校验这个多个字段 校验
+        bread = attrs['bread']
+        bcomment = attrs['bcomment']
+        if bread < bcomment:
+            raise serializers.ValidationError('阅读量小于评论量')
+        return attrs
 
 
 class HeroInfoSerializer(serializers.Serializer):

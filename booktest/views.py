@@ -37,7 +37,7 @@ serializer_hero.data
 
 
 """反序列化"""
-data = {'btitle': 'django三国演义', 'bpub_date': '1996-5-1'}
+data = {'btitle': 'django三国演义', 'bpub_date': '1996-5-1', 'bcomment': 40, 'bread': 30}
 serializer = BookInfoSerializer(data=data)  # instance data **kwargs
 # serializer.is_valid()  # 返回布尔值
 # serializer.errors  # is_valid 返回 False,看错误信息
