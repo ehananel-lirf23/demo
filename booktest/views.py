@@ -36,6 +36,14 @@ serializer_hero = HeroInfoSerializer(instance=hero)
 serializer_hero.data
 
 
+"""反序列化"""
+data = {'btitle': '三国演义', 'bpub_date': '1996-5-1'}
+serializer = BookInfoSerializer(data=data)  # instance data **kwargs
+serializer.is_valid()  # 返回布尔值
+serializer.errors  # is_valid 返回 False,看错误信息
+serializer.validated_data  # OrderedDict([('btitle', '三国演义'), ('bpub_date', datetime.date(1996, 5, 1))])
+
+
 # class BookAPIViewSet(ModelViewSet):
 #     """定义视图集完成五个接口"""
 #
