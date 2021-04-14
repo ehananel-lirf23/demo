@@ -13,17 +13,26 @@ import json
 from rest_framework.viewsets import ModelViewSet
 
 from .models import BookInfo
-from .serializers import BookInfoModelSerializers
+# from .serializers import BookInfoModelSerializers
+from booktest.serializers import BookInfoSerializer
+from booktest.models import BookInfo
 
 
-class BookAPIViewSet(ModelViewSet):
-    """定义视图集完成五个接口"""
+# 获取模型数据
+# 创建序列化器并完成序列化  # shell 启动 测试
+book = BookInfo.objects.get(id=1)
+serializer = BookInfoSerializer(book)
+serializer.data  # {'id': 1, 'btitle': '射雕英雄传0', 'bpub_date': '1980-05-01', 'bread': 12, 'bcomment': 34, 'image': None}
 
-    # 指定查询集
-    queryset = BookInfo.objects.all()
 
-    # 指定序列化器
-    serializer_class = BookInfoModelSerializers
+# class BookAPIViewSet(ModelViewSet):
+#     """定义视图集完成五个接口"""
+#
+#     # 指定查询集
+#     queryset = BookInfo.objects.all()
+#
+#     # 指定序列化器
+#     serializer_class = BookInfoModelSerializers
 
 
 # class BooksAPIView(View):
