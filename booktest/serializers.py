@@ -22,3 +22,22 @@ class BookInfoSerializer(serializers.Serializer):  # Serializer 是  ModelSerial
     bread = serializers.IntegerField(label='阅读量', required=False)
     bcomment = serializers.IntegerField(label='评论量', required=False)  # default=0
     image = serializers.ImageField(label='图片', required=False)  # null=True
+    # 如果在一的序列器中要序列化多的那一方时,要多加 many=true
+    heroinfo_set = serializers.PrimaryKeyRelatedField(label='英雄', read_only=True, many=True)
+    # heroinfo_set = serializers.StringRelatedField(label='英雄', read_only=True, many=True)
+
+
+class HeroInfoSerializer(serializers.Serializer):
+    """英雄数据序列化器"""
+    GENDER_CHOICES = (
+        (0, 'female'),
+        (1, 'male')
+    )
+
+    id = serializers.IntegerField(label='ID', read_only=True)
+    hname = serializers.CharField(label='名字', max_length=20)
+    hgender = serializers.ChoiceField(choices=GENDER_CHOICES, label='性别', required=False)
+    hcomment = serializers.CharField(label='描叙信息', max_length=200, required=False,  allow_null=True)
+    # hbook = serializers.PrimaryKeyRelatedField(label='书籍', read_only=True)  # 只序列化出外键的id
+    # hbook = serializers.StringRelatedField(label='书籍', read_only=True)  # 序列化出外键对象的str方法返回值
+    hbook = BookInfoSerializer()  # 在序列化外键时,会把外键对应的序列化器中的所有数据充列化出来
