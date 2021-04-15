@@ -30,8 +30,8 @@ class BookInfoSerializer(serializers.Serializer):  # Serializer 是  ModelSerial
     bcomment = serializers.IntegerField(label='评论量', required=False)  # default=0
     image = serializers.ImageField(label='图片', required=False)  # null=True
     # 如果在一的序列器中要序列化多的那一方时,要多加 many=true
-    heroinfo_set = serializers.PrimaryKeyRelatedField(label='英雄', read_only=True, many=True)
-    # heroinfo_set = serializers.StringRelatedField(label='英雄', read_only=True, many=True)
+    # heroinfo_set = serializers.PrimaryKeyRelatedField(label='英雄', read_only=True, many=True)
+    heroinfo_set = serializers.StringRelatedField(label='英雄', read_only=True, many=True)
 
     # 对单一字段进行额外追加校验逻辑时 固定写法 方法名: validate_字段名()
     def validate_btitle(self, value):  # 注意点 上面的属性定义的时候 校验该变量btible 然后 就会先校验这个方法，然后再到上面继续下一个字段
