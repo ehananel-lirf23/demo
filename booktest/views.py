@@ -2,9 +2,9 @@ from rest_framework.views import APIView
 from rest_framework.generics import GenericAPIView  # 导入GenericAPIView
 from rest_framework.response import Response
 from rest_framework.generics import ListAPIView, CreateAPIView, RetrieveAPIView, UpdateAPIView, DestroyAPIView
-from rest_framework.viewsets import ViewSet  # 视图集
+from rest_framework.viewsets import ViewSet, GenericViewSet  # 视图集
 from rest_framework import status  # 导入 DRF 提供的状态码 文件
-
+from rest_framework.mixins import ListModelMixin, RetrieveModelMixin  # 导入扩展类
 from .models import BookInfo  # 导入模型类
 from .serializers import BookInfoSerializer  # 导入 定义的序列化器 Serializer
 
@@ -73,19 +73,28 @@ class BookDetailView(RetrieveAPIView, UpdateAPIView, DestroyAPIView):
     serializer_class = BookInfoSerializer
 
 
-class BookViewSet(ViewSet):
+"""继承视图集 ViewSet """
+# class BookViewSet(ViewSet):
+#
+#     def list(self, request):
+#         """获取所有图书"""
+#         qs =BookInfo.objects.all()
+#         serializer = BookInfoSerializer(qs, many=True)
+#         return Response(serializer.data)
+#
+#     def retrieve(self, request, pk):
+#         """获取单一图书"""
+#         try:
+#             book = BookInfo.objects.get(id=pk)
+#         except BookInfo.DoesNotExist:
+#             return Response(status=status.HTTP_400_BAD_REQUEST)
+#         serializer = BookInfoSerializer(book)
+#         return Response(serializer.data)
 
-    def list(self, request):
-        """获取所有图书"""
-        qs =BookInfo.objects.all()
-        serializer = BookInfoSerializer(qs, many=True)
-        return Response(serializer.data)
 
-    def retrieve(self, request, pk):
-        """获取单一图书"""
-        try:
-            book = BookInfo.objects.get(id=pk)
-        except BookInfo.DoesNotExist:
-            return Response(status=status.HTTP_400_BAD_REQUEST)
-        serializer = BookInfoSerializer(book)
-        return Response(serializer.data)
+"""继承视图集 GenericViewSet配置Mixin"""
+class BookViewSet(GenericViewSet, ListModelMixin, RetrieveModelMixin):
+    """使用扩展类Mixin"""
+    # 查询集 GenericViewSet类中的 两者搭配
+    queryset = BookInfo.objects.all()
+    serializer_class = BookInfoSerializer
