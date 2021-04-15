@@ -1,0 +1,161 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Diagram>
+  <ID>Python</ID>
+  <OriginalElement>#G:/itheima/PyCharm code/py3_django/Lib/site-packages/rest_framework/viewsets.py</OriginalElement>
+  <nodes>
+    <node x="1751.375" y="170.0">rest_framework.mixins.CreateModelMixin</node>
+    <node x="996.375" y="80.0">object</node>
+    <node x="601.0699855699854" y="410.0">rest_framework.viewsets.GenericViewSet</node>
+    <node x="909.7967171717173" y="510.0">rest_framework.viewsets.ModelViewSet</node>
+    <node x="923.375" y="170.0">django.views.generic.base.View</node>
+    <node x="1455.375" y="170.0">rest_framework.mixins.UpdateModelMixin</node>
+    <node x="936.625" y="410.0">rest_framework.viewsets.ViewSet</node>
+    <node x="955.375" y="0.0">_collections_abc.Hashable</node>
+    <node x="498.875" y="330.0">rest_framework.viewsets.ViewSetMixin</node>
+    <node x="770.875" y="330.0">rest_framework.generics.GenericAPIView</node>
+    <node x="927.875" y="250.0">rest_framework.views.APIView</node>
+    <node x="191.04671717171732" y="510.0">rest_framework.viewsets.ReadOnlyModelViewSet</node>
+    <node x="1157.375" y="170.0">rest_framework.mixins.DestroyModelMixin</node>
+    <node x="272.0" y="410.0">rest_framework.mixins.RetrieveModelMixin</node>
+    <node x="0.0" y="410.0">rest_framework.mixins.ListModelMixin</node>
+  </nodes>
+  <notes />
+  <edges>
+    <edge source="object" target="_collections_abc.Hashable">
+      <point x="0.0" y="-15.0" />
+      <point x="0.0" y="15.0" />
+    </edge>
+    <edge source="rest_framework.viewsets.ReadOnlyModelViewSet" target="rest_framework.mixins.ListModelMixin">
+      <point x="-105.0" y="-15.0" />
+      <point x="243.54671717171732" y="490.0" />
+      <point x="63.0" y="490.0" />
+      <point x="-63.0" y="15.0" />
+    </edge>
+    <edge source="rest_framework.viewsets.ModelViewSet" target="rest_framework.mixins.CreateModelMixin">
+      <point x="107.91666666666663" y="-15.0" />
+      <point x="1147.2133838383838" y="490.0" />
+      <point x="1886.875" y="490.0" />
+      <point x="0.0" y="15.0" />
+    </edge>
+    <edge source="rest_framework.viewsets.ReadOnlyModelViewSet" target="rest_framework.mixins.RetrieveModelMixin">
+      <point x="0.0" y="-15.0" />
+      <point x="348.5467171717173" y="490.0" />
+      <point x="342.0" y="490.0" />
+      <point x="-70.0" y="15.0" />
+    </edge>
+    <edge source="rest_framework.mixins.UpdateModelMixin" target="object">
+      <point x="0.0" y="-15.0" />
+      <point x="1593.375" y="140.0" />
+      <point x="1049.8035714285716" y="140.0" />
+      <point x="19.428571428571445" y="15.0" />
+    </edge>
+    <edge source="rest_framework.viewsets.ModelViewSet" target="rest_framework.mixins.UpdateModelMixin">
+      <point x="64.75" y="-15.0" />
+      <point x="1104.0467171717173" y="480.0" />
+      <point x="1593.375" y="480.0" />
+      <point x="0.0" y="15.0" />
+    </edge>
+    <edge source="rest_framework.mixins.CreateModelMixin" target="object">
+      <point x="0.0" y="-15.0" />
+      <point x="1886.875" y="130.0" />
+      <point x="1059.517857142857" y="130.0" />
+      <point x="29.14285714285711" y="15.0" />
+    </edge>
+    <edge source="rest_framework.viewsets.ModelViewSet" target="rest_framework.mixins.ListModelMixin">
+      <point x="-107.91666666666663" y="-15.0" />
+      <point x="931.3800505050506" y="480.0" />
+      <point x="189.0" y="480.0" />
+      <point x="63.0" y="15.0" />
+    </edge>
+    <edge source="rest_framework.viewsets.ViewSet" target="rest_framework.views.APIView">
+      <point x="55.25" y="-15.0" />
+      <point x="1102.375" y="305.0" />
+      <point x="1081.625" y="305.0" />
+      <point x="51.25" y="15.0" />
+    </edge>
+    <edge source="rest_framework.viewsets.ViewSet" target="rest_framework.viewsets.ViewSetMixin">
+      <point x="-55.25" y="-15.0" />
+      <point x="991.875" y="380.0" />
+      <point x="687.875" y="380.0" />
+      <point x="63.0" y="15.0" />
+    </edge>
+    <edge source="rest_framework.viewsets.GenericViewSet" target="rest_framework.generics.GenericAPIView">
+      <point x="66.25" y="-15.0" />
+      <point x="799.8199855699854" y="390.0" />
+      <point x="904.375" y="390.0" />
+      <point x="0.0" y="15.0" />
+    </edge>
+    <edge source="rest_framework.viewsets.ModelViewSet" target="rest_framework.viewsets.GenericViewSet">
+      <point x="-21.583333333333258" y="-15.0" />
+      <point x="1017.7133838383841" y="460.0" />
+      <point x="799.8199855699854" y="460.0" />
+      <point x="66.25" y="15.0" />
+    </edge>
+    <edge source="rest_framework.generics.GenericAPIView" target="rest_framework.views.APIView">
+      <point x="0.0" y="-15.0" />
+      <point x="904.375" y="305.0" />
+      <point x="979.125" y="305.0" />
+      <point x="-51.25" y="15.0" />
+    </edge>
+    <edge source="rest_framework.views.APIView" target="django.views.generic.base.View">
+      <point x="0.0" y="-15.0" />
+      <point x="0.0" y="15.0" />
+    </edge>
+    <edge source="rest_framework.viewsets.GenericViewSet" target="rest_framework.viewsets.ViewSetMixin">
+      <point x="-66.25" y="-15.0" />
+      <point x="667.3199855699854" y="390.0" />
+      <point x="561.875" y="390.0" />
+      <point x="-63.0" y="15.0" />
+    </edge>
+    <edge source="rest_framework.viewsets.ReadOnlyModelViewSet" target="rest_framework.viewsets.GenericViewSet">
+      <point x="105.0" y="-15.0" />
+      <point x="453.5467171717173" y="490.0" />
+      <point x="667.3199855699854" y="490.0" />
+      <point x="-66.25" y="15.0" />
+    </edge>
+    <edge source="rest_framework.mixins.RetrieveModelMixin" target="object">
+      <point x="0.0" y="-15.0" />
+      <point x="412.0" y="140.0" />
+      <point x="1010.9464285714287" y="140.0" />
+      <point x="-19.428571428571445" y="15.0" />
+    </edge>
+    <edge source="rest_framework.mixins.DestroyModelMixin" target="object">
+      <point x="0.0" y="-15.0" />
+      <point x="1296.375" y="150.0" />
+      <point x="1040.0892857142858" y="150.0" />
+      <point x="9.714285714285666" y="15.0" />
+    </edge>
+    <edge source="rest_framework.viewsets.ModelViewSet" target="rest_framework.mixins.DestroyModelMixin">
+      <point x="21.58333333333337" y="-15.0" />
+      <point x="1060.8800505050506" y="470.0" />
+      <point x="1296.375" y="470.0" />
+      <point x="0.0" y="15.0" />
+    </edge>
+    <edge source="rest_framework.viewsets.ViewSetMixin" target="object">
+      <point x="0.0" y="-15.0" />
+      <point x="624.875" y="150.0" />
+      <point x="1020.6607142857144" y="150.0" />
+      <point x="-9.714285714285666" y="15.0" />
+    </edge>
+    <edge source="django.views.generic.base.View" target="object">
+      <point x="0.0" y="-15.0" />
+      <point x="0.0" y="15.0" />
+    </edge>
+    <edge source="rest_framework.mixins.ListModelMixin" target="object">
+      <point x="0.0" y="-15.0" />
+      <point x="126.0" y="130.0" />
+      <point x="1001.2321428571429" y="130.0" />
+      <point x="-29.14285714285711" y="15.0" />
+    </edge>
+    <edge source="rest_framework.viewsets.ModelViewSet" target="rest_framework.mixins.RetrieveModelMixin">
+      <point x="-64.75" y="-15.0" />
+      <point x="974.5467171717173" y="470.0" />
+      <point x="482.0" y="470.0" />
+      <point x="70.0" y="15.0" />
+    </edge>
+  </edges>
+  <settings layout="Hierarchic Group" zoom="1.04282917278512" x="613.8526167566298" y="337.1030274583431" />
+  <SelectedNodes />
+  <Categories />
+</Diagram>
+

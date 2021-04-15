@@ -5,12 +5,19 @@ from rest_framework import serializers
 from booktest.models import BookInfo  # 良好格式：导第三方的模块 和 自建模块 隔开一行
 
 
-# class BookInfoModelSerializers(serializers.ModelSerializer):
-#     """定义序列化器"""
-#     class Meta:
-#         model = BookInfo  # 给序列化器 指定 字段从那个模型去映射
-#         fields = '__all__'  # 指定 需要从模型中 映射 哪些字段 (自动生成 对应的 序列化类器)
-#         # fields = ['id', 'btitle']
+class BookInfoModelSerializer(serializers.ModelSerializer):
+    """定义序列化器"""
+    # 注意是元类中写 参数信息
+    class Meta:
+        model = BookInfo  # 给序列化器 指定 字段从那个模型去映射
+        fields = '__all__'  # 指定 需要从模型中 映射 哪些字段 (自动生成 对应的 序列化类器字段)
+        # fields = ['id', 'btitle']  # 显示指明 字段
+        # exclude = ('image',)  # exclude可以明确排除掉 哪些字段 其他都要
+        read_only_fields = ('id', 'bread', 'bcomment')  # 指明只读字段 指定只出输出的字典（只会序列化）
+        extra_kwargs = {  # 添加额外参数  给某些字段进行选项修改、指定
+            'bread': {'min_value': 0, 'required': True},
+            'bcomment': {'min_value': 0, 'required': True},
+        }
 
 
 class BookInfoSerializer(serializers.Serializer):  # Serializer 是  ModelSerializer 父类

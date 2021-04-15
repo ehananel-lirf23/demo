@@ -13,7 +13,7 @@ import json
 from rest_framework.viewsets import ModelViewSet
 
 from .models import BookInfo
-# from .serializers import BookInfoModelSerializers
+from booktest.serializers import BookInfoModelSerializer
 from booktest.serializers import BookInfoSerializer, HeroInfoSerializer
 from booktest.models import BookInfo, HeroInfo
 
@@ -54,14 +54,14 @@ serializer.is_valid(raise_exception=True)
 serializer.save()  # 序列化中的saexitve实质 依靠方法模型自身的save()
 
 
-# class BookAPIViewSet(ModelViewSet):
-#     """定义视图集完成五个接口"""
-#
-#     # 指定查询集
-#     queryset = BookInfo.objects.all()
-#
-#     # 指定序列化器
-#     serializer_class = BookInfoModelSerializers
+class BookAPIViewSet(ModelViewSet):  # ModelViewSet多继承6个类   强大
+    """定义视图集完成五个接口"""
+
+    # 指定查询集
+    queryset = BookInfo.objects.all()
+
+    # 指定序列化器
+    serializer_class = BookInfoModelSerializer
 
 
 # class BooksAPIView(View):
