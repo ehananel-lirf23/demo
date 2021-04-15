@@ -5,6 +5,8 @@ from rest_framework.generics import ListAPIView, CreateAPIView, RetrieveAPIView,
 from rest_framework.viewsets import ViewSet, GenericViewSet, ModelViewSet  # 视图集
 from rest_framework import status  # 导入 DRF 提供的状态码 文件
 from rest_framework.mixins import ListModelMixin, RetrieveModelMixin  # 导入扩展类
+from rest_framework.decorators import action  # DRF包中装饰器模块 导入 action
+
 from .models import BookInfo  # 导入模型类
 from .serializers import BookInfoSerializer  # 导入 定义的序列化器 Serializer
 
@@ -101,6 +103,25 @@ class BookDetailView(RetrieveAPIView, UpdateAPIView, DestroyAPIView):
 
 
 """ModelViewSet 就是 视图集GenericViewSet和扩展类Mixin分别搭配 成的 五种接口"""
-class BookViewSet(ModelViewSet):
+class BookViewSet(ModelViewSet):  # 继承已经实现了 基本的五个接口 添加 附加latest update_bread
     queryset = BookInfo.objects.all()
     serializer_class = BookInfoSerializer
+
+    # 添加 附加的 需求接口 action
+    @action(['get'], detail=False)  # detail它是来控制router生成路由时,需不需要加pk  路径:books/latest/
+    def latest(self, request):
+        """获取倒序后的最新书籍数据"""
+        book = BookInfo.objects.latest('id')  # latest取到id为最后的对象
+        serializer = BookInfoSerializer(book)
+        return Response(serializer.data)
+
+    @action(['put'], detail=True)  # detail为True，表示路径:books/{pk}/update_bread/
+    def update_bread(self, request, pk):
+        """修改书籍阅读量"""
+        book = self.get_object()
+        book.bread = request.data.get('bread')
+        book.save()
+
+        serializer = BookInfoSerializer(book)
+        return Response(serializer.data)
+
