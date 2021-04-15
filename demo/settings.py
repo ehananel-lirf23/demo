@@ -172,3 +172,18 @@ SESSION_CACHE_ALIAS = "default"  # 会话缓存别名
 
 # 配置站点中上传的图片存储目录
 MEDIA_ROOT = os.path.join(BASE_DIR, 'static_files/media')
+
+# DRF 所有配置  全局 配置
+REST_FRAMEWORK = {
+    'DEFAULT_AUTHENTICATION_CLASSES': (
+        # 优先级 先验证 基本认证 认证未通过 验证 session ，前者是防止用户的浏览器设置禁用cookie导致登录不了，前者不依靠session验证
+        'rest_framework.authentication.BasicAuthentication',  # 基本认证
+        'rest_framework.authentication.SessionAuthentication',  # session认证
+    ),
+
+    # 默认的权限管理类
+    # 'DEFAULT_PERMISSION_CLASSES': (
+    #     # 'rest_framework.permissions.IsAuthenticated',
+    #     'rest_framework.permissions.AllowAny',  # 默认配置 选择 允许所有 allow any
+    # )
+}

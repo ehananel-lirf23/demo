@@ -6,6 +6,7 @@ from rest_framework.viewsets import ViewSet, GenericViewSet, ModelViewSet  # 视
 from rest_framework import status  # 导入 DRF 提供的状态码 文件
 from rest_framework.mixins import ListModelMixin, RetrieveModelMixin  # 导入扩展类
 from rest_framework.decorators import action  # DRF包中装饰器模块 导入 action
+from rest_framework.permissions import IsAuthenticated, BasePermission
 
 from .models import BookInfo  # 导入模型类
 from .serializers import BookInfoSerializer  # 导入 定义的序列化器 Serializer
@@ -102,10 +103,26 @@ class BookDetailView(RetrieveAPIView, UpdateAPIView, DestroyAPIView):
 #     serializer_class = BookInfoSerializer
 
 
+class MyPermission(BasePermission):  # 继承于 基础权限管理的类
+    # 测试，实际情况是 根据用户信息来设定权限等
+    # 是否可以访问数据对象， view表示当前视图， obj为数据对象
+    def has_object_permission(self, request, view, obj):
+        """控制对obj对象的访问权限，此案例决绝所有对对象的访问"""
+        return False  # False表示拒绝访问，这只是测试，没有逻辑判断导致 所有都没有对象访问
+
+
 """ModelViewSet 就是 视图集GenericViewSet和扩展类Mixin分别搭配 成的 五种接口"""
 class BookViewSet(ModelViewSet):  # 继承已经实现了 基本的五个接口 添加 附加latest update_bread
     queryset = BookInfo.objects.all()
     serializer_class = BookInfoSerializer
+    # 来自APIView 继承过来的 认证  局部验证
+
+    # from rest_framework.authentication import SessionAuthentication, BasicAuthentication
+    # # 视图中 局部 认证
+    # authentication_classes = (SessionAuthentication, BasicAuthentication)
+
+    # 指定访问当前整个类视图时指定的权限
+    permission_classes = [IsAuthenticated, MyPermission]
 
     # 添加 附加的 需求接口 action
     @action(['get'], detail=False)  # detail它是来控制router生成路由时,需不需要加pk  路径:books/latest/
