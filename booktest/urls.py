@@ -7,8 +7,13 @@ urlpatterns = [
     # 获取列表数据/新增
     # url(r'^books/$', views.BooksAPIView.as_view()),
     # url(r'^books/(?P<pk>\d+)/$', views.BookAPIView.as_view()),
+
     # 定义获取所有图书的接口
-    url(r'^books/$', views.BooksAPIView.as_view()),
+    # url(r'^books/$', views.BooksAPIView.as_view()),
+
+    # 定义获取所有图书
+    url(r'^books/$', views.BookListView.as_view()),
+    url(r'^books/(?P<pk>\d+)/$', views.BookDetailView.as_view()),
 ]
 
 # 创建 路由器 对象
