@@ -2,7 +2,7 @@ from rest_framework.views import APIView
 from rest_framework.generics import GenericAPIView  # 导入GenericAPIView
 from rest_framework.response import Response
 from rest_framework.generics import ListAPIView, CreateAPIView, RetrieveAPIView, UpdateAPIView, DestroyAPIView
-from rest_framework.viewsets import ViewSet, GenericViewSet  # 视图集
+from rest_framework.viewsets import ViewSet, GenericViewSet, ModelViewSet  # 视图集
 from rest_framework import status  # 导入 DRF 提供的状态码 文件
 from rest_framework.mixins import ListModelMixin, RetrieveModelMixin  # 导入扩展类
 from .models import BookInfo  # 导入模型类
@@ -92,9 +92,15 @@ class BookDetailView(RetrieveAPIView, UpdateAPIView, DestroyAPIView):
 #         return Response(serializer.data)
 
 
-"""继承视图集 GenericViewSet配置Mixin"""
-class BookViewSet(GenericViewSet, ListModelMixin, RetrieveModelMixin):
-    """使用扩展类Mixin"""
-    # 查询集 GenericViewSet类中的 两者搭配
+"""继承 视图集GenericViewSet 和 扩展类Mixin实现"""
+# class BookViewSet(GenericViewSet, ListModelMixin, RetrieveModelMixin):
+#     """使用扩展类Mixin"""
+#     # 查询集 GenericViewSet类中的 两者搭配
+#     queryset = BookInfo.objects.all()
+#     serializer_class = BookInfoSerializer
+
+
+"""ModelViewSet 就是 视图集GenericViewSet和扩展类Mixin分别搭配 成的 五种接口"""
+class BookViewSet(ModelViewSet):
     queryset = BookInfo.objects.all()
     serializer_class = BookInfoSerializer
