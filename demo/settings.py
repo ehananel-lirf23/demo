@@ -186,4 +186,15 @@ REST_FRAMEWORK = {
     #     # 'rest_framework.permissions.IsAuthenticated',
     #     'rest_framework.permissions.AllowAny',  # 默认配置 选择 允许所有 allow any
     # )
+
+    # 限流
+    'DEFAULT_THROTTLE_CLASSES': (  # 配置限流
+        'rest_framework.throttling.AnonRateThrottle',
+        'rest_framework.throttling.UserRateThrottle'
+    ),
+    'DEFAULT_THROTTLE_RATES': {  # 限流的 访问限制
+        'anon': '20/day',  # 匿名用户的访问限制, 技术根据访问IP实现
+        'user': '1000/day'  # 登录用户的访问限制
+    },
+
 }
