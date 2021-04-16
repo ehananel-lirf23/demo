@@ -44,6 +44,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
 
     'rest_framework',  # DRF  注册 引用 格式 最好 上是框架自带引用 这里 第三方， 下面 自设计的子应用
+    'django_filters',  # # 需要注册应用， 注意使用 过滤 要注册 应用django_filters
 
     'users.apps.UsersConfig',  # 新注册的子应用users
     'request_response.apps.RequestResponseConfig',
@@ -177,8 +178,8 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'static_files/media')
 REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES': (
         # 优先级 先验证 基本认证 认证未通过 验证 session ，前者是防止用户的浏览器设置禁用cookie导致登录不了，前者不依靠session验证
-        'rest_framework.authentication.BasicAuthentication',  # 基本认证
-        'rest_framework.authentication.SessionAuthentication',  # session认证
+        # 'rest_framework.authentication.BasicAuthentication',  # 基本认证
+        # 'rest_framework.authentication.SessionAuthentication',  # session认证
     ),
 
     # 默认的权限管理类
@@ -193,8 +194,14 @@ REST_FRAMEWORK = {
         'rest_framework.throttling.UserRateThrottle'
     ),
     'DEFAULT_THROTTLE_RATES': {  # 限流的 访问限制
-        'anon': '20/day',  # 匿名用户的访问限制, 技术根据访问IP实现
+        'anon': '120/day',  # 匿名用户的访问限制, 技术根据访问IP实现，注： 项目文件中 有记录， 重启系统也无法重启 访问次数的数据
         'user': '1000/day'  # 登录用户的访问限制
     },
 
+    # 指定过滤后端配置
+    'DEFAULT_FILTER_BACKENDS': ('django_filters.rest_framework.DjangoFilterBackend',)
+
 }
+
+
+

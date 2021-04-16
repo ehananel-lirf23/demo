@@ -8,6 +8,7 @@ from rest_framework.mixins import ListModelMixin, RetrieveModelMixin  # 导入�
 from rest_framework.decorators import action  # DRF包中装饰器模块 导入 action
 from rest_framework.permissions import IsAuthenticated, BasePermission
 from rest_framework.throttling import UserRateThrottle
+from rest_framework.filters import OrderingFilter
 
 from .models import BookInfo  # 导入模型类
 from .serializers import BookInfoSerializer  # 导入 定义的序列化器 Serializer
@@ -123,11 +124,13 @@ class BookViewSet(ModelViewSet):  # 继承已经实现了 基本的五个接口 
     # authentication_classes = (SessionAuthentication, BasicAuthentication)
 
     # 指定访问当前整个类视图时指定的权限
-    permission_classes = [IsAuthenticated, MyPermission]
+    # permission_classes = [IsAuthenticated, MyPermission]
 
     # 指定当前整个视图 限流  且按照 用户身份的形式。
-    throttle_classes = [UserRateThrottle, ]
-    
+    # throttle_classes = [UserRateThrottle, ]
+
+    # 注意写到视图上的请求
+    filter_fields = ['btitle', 'bread']  # 指定过滤的字段
 
     # 添加 附加的 需求接口 action
     @action(['get'], detail=False)  # detail它是来控制router生成路由时,需不需要加pk  路径:books/latest/
